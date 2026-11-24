@@ -27,6 +27,7 @@ export const blocks = registry.items
       slug: item.name,
       title: item.title,
       description: item.description,
+      category: ("categories" in item && item.categories?.[0]) || "block",
       height: heights[item.name] ?? 720,
       Component: lazy(modules[path]),
       loadSource: sources[path],
