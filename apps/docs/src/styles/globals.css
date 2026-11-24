@@ -25,10 +25,6 @@ body {
 .docs-grid {
   background-image: radial-gradient(var(--dots) 1px, transparent 1px);
   background-size: 20px 20px;
-  background-color: var(--card);
-}
-
-:is(.dark, [data-theme="dark"]) .docs-grid {
   background-color: var(--muted);
 }
 

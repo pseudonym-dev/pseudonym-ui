@@ -15,8 +15,8 @@ export function Preview({
   className?: string;
 }) {
   return (
-    <Tabs defaultValue="preview" className="overflow-hidden rounded-xl bg-card inset-ring inset-ring-border">
-      <TabsList className="rounded-none border-b border-border bg-card inset-ring-0 dark:bg-muted/60">
+    <Tabs defaultValue="preview" className="overflow-hidden rounded-xl border border-border">
+      <TabsList className="rounded-none border-b border-border bg-muted/60 inset-ring-0">
         <TabsTab value="preview" className="h-8 flex-none">
           Preview
         </TabsTab>

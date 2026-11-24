@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="card" className={cn("flex flex-col bg-card text-card-foreground", className)} {...props} />;
+  return <div data-slot="card" className={cn("flex flex-col rounded-2xl border border-border bg-card p-3 text-card-foreground shadow-sm", className)} {...props} />;
 }
 
 function CardMedia({ className, ...props }: React.ComponentProps<"div">) {
