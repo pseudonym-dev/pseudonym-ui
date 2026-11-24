@@ -4,10 +4,12 @@ import { type ReactNode, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
+import { AreaChart, BarChart } from "@/components/ui/chart";
 import { Card, CardDescription, CardFooter, CardMedia, CardTitle } from "@/components/ui/card";
 import { Drawer, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { DropZone, DropZoneIcon, DropZoneTitle } from "@/components/ui/drop-zone";
 import { Field, FieldGrid, FieldHint, FieldLabel, FieldValue } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sidebar, SidebarBody, SidebarDisabled, SidebarSection, SidebarTitle } from "@/components/ui/sidebar";
@@ -475,6 +477,42 @@ const formats = [
 <ThemeProvider>
   <ThemeToggle />
 </ThemeProvider>`,
+  },
+  {
+    slug: "input",
+    title: "Input",
+    description: "A 40px text input that matches the select trigger.",
+    item: "input",
+    preview: (
+      <Field className="w-72">
+        <FieldLabel htmlFor="input-demo">Project name</FieldLabel>
+        <Input id="input-demo" placeholder="toucan-profile" />
+        <FieldHint>Used for the export file name.</FieldHint>
+      </Field>
+    ),
+    code: `import { Input } from "@/components/ui/input"
+
+<Input id="name" placeholder="toucan-profile" />`,
+  },
+  {
+    slug: "chart",
+    title: "Chart",
+    description: "Lightweight SVG area and bar charts drawn with the chart tokens. No chart library.",
+    item: "chart",
+    preview: (
+      <div className="grid w-full max-w-xl gap-6 sm:grid-cols-2">
+        <AreaChart data={[12, 18, 15, 24, 22, 31, 29, 38]} aria-label="Exports" className="h-32" />
+        <BarChart data={[5, 8, 6, 9, 12, 7, 14]} aria-label="Renders" className="h-32" />
+      </div>
+    ),
+    code: `import { AreaChart, BarChart, ChartLegend } from "@/components/ui/chart"
+
+<AreaChart data={[12, 18, 15, 24, 22, 31]} aria-label="Exports" />
+<BarChart data={[5, 8, 6, 9, 12, 7]} aria-label="Renders" />
+<ChartLegend>
+  <span>Mon</span>
+  <span>Sun</span>
+</ChartLegend>`,
   },
 ];
 

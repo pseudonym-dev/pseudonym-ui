@@ -29,6 +29,9 @@ export function Home() {
         >
           Components
         </Link>
+        <Link className="hidden text-sm font-semibold text-muted-foreground hover:text-foreground sm:inline" to="/docs/blocks">
+          Blocks
+        </Link>
         <a className="hidden text-sm font-semibold text-muted-foreground hover:text-foreground sm:inline" href={SITE.studio}>
           ASCII Studio
         </a>
@@ -54,6 +57,9 @@ export function Home() {
           </Link>
           <Link to="/docs/components/button" className={buttonVariants({ variant: "secondary" })}>
             Browse components
+          </Link>
+          <Link to="/docs/blocks" className={buttonVariants({ variant: "secondary" })}>
+            See blocks
           </Link>
         </div>
         <div className="mt-6 max-w-2xl">

@@ -17,5 +17,5 @@
       "@/lib/*": ["../../registry/lib/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../../registry/blocks"]
 }

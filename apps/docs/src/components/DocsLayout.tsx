@@ -45,6 +45,7 @@ function NavList({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 export function DocsLayout() {
+  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
   return (
@@ -72,7 +73,7 @@ export function DocsLayout() {
           <NavList />
         </aside>
         <main className="min-w-0 px-4 py-10 sm:px-8">
-          <div className="mx-auto max-w-3xl">
+          <div className={cn("mx-auto", pathname.startsWith("/docs/blocks") ? "max-w-6xl" : "max-w-3xl")}>
             <Outlet />
           </div>
         </main>

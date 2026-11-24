@@ -47,3 +47,16 @@ test("code blocks are highlighted and follow the theme", async ({ page }) => {
   await page.getByRole("button", { name: "Switch to dark theme" }).click();
   expect(await block.evaluate((el) => getComputedStyle(el).backgroundColor)).not.toBe("rgb(255, 255, 255)");
 });
+
+test("blocks index links to a block with a live preview", async ({ page }) => {
+  await page.goto("/docs/blocks");
+  await page.getByRole("link", { name: /Dashboard/ }).first().click();
+  await expect(page.getByText(/npx shadcn@latest add/)).toBeVisible();
+  const preview = page.frameLocator("iframe");
+  await expect(preview.getByRole("heading", { name: "Overview" })).toBeVisible();
+});
+
+test("theme item does not mirror breakpoints into consumers' @theme", async ({ request }) => {
+  const body = await (await request.get("/r/theme.json")).json();
+  expect(Object.keys(body.cssVars.light).filter((name) => name.startsWith("breakpoint-"))).toEqual([]);
+});
