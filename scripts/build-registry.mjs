@@ -21,7 +21,10 @@ async function themeCssVars() {
     const body = css.slice(start, css.indexOf("\n}", start));
     return Object.fromEntries([...body.matchAll(/^\s*--([\w-]+):\s*(.+);$/gm)].map((m) => [m[1], m[2]]));
   };
-  return { theme: block("@theme inline"), light: block(":root"), dark: block('[data-theme="dark"]') };
+  // shadcn mirrors every :root var into `@theme inline`, so a `--breakpoint-*` var would become
+  // `@media (width >= var(...))`, which is invalid CSS and breaks consumers' `md:` classes.
+  const light = Object.fromEntries(Object.entries(block(":root")).filter(([name]) => !name.startsWith("breakpoint-")));
+  return { theme: block("@theme inline"), light, dark: block('[data-theme="dark"]') };
 }
 
 await mkdir(outDir, { recursive: true });
