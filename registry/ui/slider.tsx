@@ -14,13 +14,13 @@ function Slider({ className, children, ...props }: React.ComponentProps<typeof S
     >
       {children ?? (
         <SliderPrimitive.Control className="flex h-6 w-full items-center">
-          <SliderPrimitive.Track className="relative h-2 w-full grow rounded-full bg-border select-none">
-            <SliderPrimitive.Indicator className="absolute h-full rounded-full bg-brand-fill" />
+          <SliderPrimitive.Track data-slot="slider-track" className="h-2 w-full rounded-full bg-border select-none">
+            <SliderPrimitive.Indicator className="rounded-full bg-brand-fill select-none" />
+            <SliderPrimitive.Thumb
+              data-slot="slider-thumb"
+              className="size-5 rounded-full bg-white shadow-md ring-2 ring-brand-fill select-none has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring"
+            />
           </SliderPrimitive.Track>
-          <SliderPrimitive.Thumb
-            data-slot="slider-thumb"
-            className="block size-5 rounded-full bg-white shadow-md ring-2 ring-brand-fill outline-none select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          />
         </SliderPrimitive.Control>
       )}
     </SliderPrimitive.Root>
