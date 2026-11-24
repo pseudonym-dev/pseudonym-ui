@@ -1,24 +1,16 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 
 import { Button } from "@/components/ui/button";
+import { Drawer, DrawerClose, DrawerPopup, DrawerTitle } from "@/components/ui/drawer";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { TopBar, TopBarSpacer } from "@/components/ui/top-bar";
 import { cn } from "@/lib/utils";
 
 import { docsNav } from "../lib/nav";
 import { SITE } from "../lib/site";
-
-function Brand({ className }: { className?: string }) {
-  return (
-    <Link to="/" className={cn("inline-flex items-center gap-2.5 text-base font-semibold text-foreground", className)}>
-      <span className="inline-grid size-8 place-items-center rounded-lg bg-primary font-mono text-[13px] font-bold tracking-tighter text-primary-foreground shadow-skeuo">
-        P_
-      </span>
-      {SITE.name}
-    </Link>
-  );
-}
+import { Brand } from "./Brand";
 
 function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const location = useLocation();
@@ -57,7 +49,7 @@ export function DocsLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-20 flex h-[60px] items-center gap-3 border-b border-border bg-background px-4">
+      <TopBar className="px-4">
         <Button
           variant="ghost"
           size="icon"
@@ -68,38 +60,38 @@ export function DocsLayout() {
           <Menu />
         </Button>
         <Brand />
-        <span className="flex-1" />
+        <TopBarSpacer />
         <a className="hidden text-sm font-semibold text-muted-foreground hover:text-foreground sm:inline" href={SITE.studio}>
           ASCII Studio
         </a>
         <ThemeToggle />
-      </header>
+      </TopBar>
 
       <div className="mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-[240px_minmax(0,1fr)]">
         <aside className="sticky top-[60px] hidden h-[calc(100vh-60px)] overflow-auto border-r border-border md:block">
           <NavList />
         </aside>
         <main className="min-w-0 px-4 py-10 sm:px-8">
-          <Outlet />
+          <div className="mx-auto max-w-3xl">
+            <Outlet />
+          </div>
         </main>
       </div>
 
-      {open ? (
-        <div className="fixed inset-0 z-30 md:hidden">
-          <button type="button" className="absolute inset-0 bg-black/60" aria-label="Close navigation" onClick={() => setOpen(false)} />
-          <aside className="absolute inset-y-0 left-0 flex w-72 flex-col bg-background shadow-float">
-            <div className="flex h-[60px] items-center justify-between border-b border-border px-3">
-              <Brand />
-              <Button variant="ghost" size="icon" aria-label="Close navigation" onClick={() => setOpen(false)}>
-                <X />
-              </Button>
-            </div>
-            <div className="overflow-auto">
-              <NavList onNavigate={() => setOpen(false)} />
-            </div>
-          </aside>
-        </div>
-      ) : null}
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerPopup className="right-auto left-0 w-72 bg-background text-foreground data-ending-style:-translate-x-full data-starting-style:-translate-x-full md:hidden">
+          <DrawerTitle className="sr-only">Navigation</DrawerTitle>
+          <div className="flex h-[60px] shrink-0 items-center justify-between border-b border-border px-3">
+            <Brand />
+            <DrawerClose render={<Button variant="ghost" size="icon" aria-label="Close navigation" />}>
+              <X />
+            </DrawerClose>
+          </div>
+          <div className="overflow-auto">
+            <NavList onNavigate={() => setOpen(false)} />
+          </div>
+        </DrawerPopup>
+      </Drawer>
     </div>
   );
 }

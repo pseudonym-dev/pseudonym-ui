@@ -2,9 +2,11 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { TopBar, TopBarSpacer } from "@/components/ui/top-bar";
 
+import { Brand } from "../components/Brand";
 import { InstallCommand } from "../components/InstallCommand";
 import { Preview } from "../components/Preview";
 import { componentDocs } from "../examples";
@@ -15,14 +17,9 @@ export function Home() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="sticky top-0 z-20 flex h-[60px] items-center gap-3 border-b border-border px-4 sm:px-6">
-        <Link to="/" className="inline-flex items-center gap-2.5 text-base font-semibold">
-          <span className="inline-grid size-8 place-items-center rounded-lg bg-primary font-mono text-[13px] font-bold tracking-tighter text-primary-foreground shadow-skeuo">
-            P_
-          </span>
-          {SITE.name}
-        </Link>
-        <span className="flex-1" />
+      <TopBar className="px-4 sm:px-6">
+        <Brand />
+        <TopBarSpacer />
         <Link className="hidden text-sm font-semibold text-muted-foreground hover:text-foreground sm:inline" to="/docs">
           Docs
         </Link>
@@ -36,13 +33,11 @@ export function Home() {
           ASCII Studio
         </a>
         <ThemeToggle />
-        <Link to="/docs">
-          <Button variant="primary">
-            Get started
-            <ArrowRight />
-          </Button>
+        <Link to="/docs" className={buttonVariants({ variant: "primary" })}>
+          Get started
+          <ArrowRight />
         </Link>
-      </header>
+      </TopBar>
 
       <main className="mx-auto max-w-5xl px-4 py-20 sm:px-8">
         <Badge>v0.1 · shadcn registry</Badge>
@@ -54,11 +49,11 @@ export function Home() {
           visual identity stays in one place.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link to="/docs/installation">
-            <Button variant="primary">Installation</Button>
+          <Link to="/docs/installation" className={buttonVariants({ variant: "primary" })}>
+            Installation
           </Link>
-          <Link to="/docs/components/button">
-            <Button variant="secondary">Browse components</Button>
+          <Link to="/docs/components/button" className={buttonVariants({ variant: "secondary" })}>
+            Browse components
           </Link>
         </div>
         <div className="mt-6 max-w-2xl">
@@ -76,8 +71,8 @@ export function Home() {
               body: "Components land in your repo as source. Change a button without waiting on a release.",
             },
             {
-              title: "Theme as a package",
-              body: "Install @pseudonym-ui/tokens and every project picks up the same light and dark CSS variables.",
+              title: "One theme, every app",
+              body: "Add the theme item and every project picks up the same light and dark CSS variables.",
             },
             {
               title: "Accessible primitives",

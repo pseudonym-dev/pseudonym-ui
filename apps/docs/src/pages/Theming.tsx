@@ -1,6 +1,6 @@
 export function Theming() {
   return (
-    <article className="mx-auto max-w-2xl">
+    <article>
       <h1 className="text-3xl font-semibold tracking-tight">Theming</h1>
       <p className="mt-4 text-muted-foreground">
         Tokens follow shadcn naming so utilities such as{" "}

@@ -1,6 +1,9 @@
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+
+import { CodeBlock } from "./CodeBlock";
 
 export function Preview({
   preview,
@@ -11,32 +14,22 @@ export function Preview({
   code: string;
   className?: string;
 }) {
-  const [tab, setTab] = useState<"preview" | "code">("preview");
-
   return (
-    <div className="overflow-hidden rounded-xl inset-ring inset-ring-border">
-      <div className="flex gap-1 border-b border-border bg-muted/60 p-1">
-        {(["preview", "code"] as const).map((value) => (
-          <button
-            key={value}
-            type="button"
-            onClick={() => setTab(value)}
-            className={cn(
-              "h-8 rounded-md px-3 text-sm font-semibold capitalize outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-              tab === value ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {value}
-          </button>
-        ))}
-      </div>
-      {tab === "preview" ? (
-        <div className={cn("docs-grid flex min-h-56 items-center justify-center p-8", className)}>{preview}</div>
-      ) : (
-        <pre className="overflow-auto bg-foreground p-5 text-[13px] leading-5 text-background">
-          <code>{code}</code>
-        </pre>
-      )}
-    </div>
+    <Tabs defaultValue="preview" className="overflow-hidden rounded-xl bg-card inset-ring inset-ring-border">
+      <TabsList className="rounded-none border-b border-border bg-card inset-ring-0 dark:bg-muted/60">
+        <TabsTab value="preview" className="h-8 flex-none">
+          Preview
+        </TabsTab>
+        <TabsTab value="code" className="h-8 flex-none">
+          Code
+        </TabsTab>
+      </TabsList>
+      <TabsPanel value="preview" className={cn("docs-grid flex min-h-56 items-center justify-center p-8", className)}>
+        {preview}
+      </TabsPanel>
+      <TabsPanel value="code">
+        <CodeBlock code={code} lang="tsx" />
+      </TabsPanel>
+    </Tabs>
   );
 }

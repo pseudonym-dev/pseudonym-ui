@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Card, CardDescription, CardFooter, CardMedia, CardTitle } from "@/components/ui/card";
-import { Drawer, DrawerClose, DrawerPopup, DrawerTrigger } from "@/components/ui/drawer";
+import { Drawer, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { DropZone, DropZoneIcon, DropZoneTitle } from "@/components/ui/drop-zone";
 import { Field, FieldGrid, FieldHint, FieldLabel, FieldValue } from "@/components/ui/field";
 import { Progress } from "@/components/ui/progress";
@@ -33,11 +33,11 @@ function SliderDemo() {
   return (
     <SliderField className="w-72">
       <SliderHead>
-        <FieldLabel htmlFor="density">Density</FieldLabel>
+        <FieldLabel id="density-label">Density</FieldLabel>
         <FieldValue>{value} columns</FieldValue>
       </SliderHead>
       <Slider
-        id="density"
+        aria-labelledby="density-label"
         min={30}
         max={220}
         value={[value]}
@@ -205,10 +205,10 @@ import { ButtonGroup } from "@/components/ui/button-group"
 
 <SliderField>
   <SliderHead>
-    <FieldLabel>Density</FieldLabel>
+    <FieldLabel id="density-label">Density</FieldLabel>
     <FieldValue>158 columns</FieldValue>
   </SliderHead>
-  <Slider min={30} max={220} defaultValue={[158]} />
+  <Slider aria-labelledby="density-label" min={30} max={220} defaultValue={[158]} />
 </SliderField>`,
   },
   {
@@ -283,13 +283,13 @@ import { ButtonGroup } from "@/components/ui/button-group"
     item: "select",
     preview: (
       <Field className="w-56">
-        <FieldLabel>Format</FieldLabel>
+        <FieldLabel id="format-label">Format</FieldLabel>
         <Select defaultValue="mp4" items={[
           { label: "MP4", value: "mp4" },
           { label: "WebM", value: "webm" },
           { label: "GIF", value: "gif" },
         ]}>
-          <SelectTrigger>
+          <SelectTrigger aria-labelledby="format-label">
             <SelectValue />
           </SelectTrigger>
           <SelectPopup>
@@ -302,8 +302,13 @@ import { ButtonGroup } from "@/components/ui/button-group"
     ),
     code: `import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-<Select defaultValue="mp4">
-  <SelectTrigger>
+const formats = [
+  { label: "MP4", value: "mp4" },
+  { label: "WebM", value: "webm" },
+]
+
+<Select defaultValue="mp4" items={formats}>
+  <SelectTrigger aria-label="Format">
     <SelectValue />
   </SelectTrigger>
   <SelectPopup>
@@ -370,18 +375,21 @@ import { ButtonGroup } from "@/components/ui/button-group"
         <DrawerTrigger render={<Button variant="secondary" />}>Open controls</DrawerTrigger>
         <DrawerPopup>
           <div className="flex items-center justify-between border-b border-border px-4 py-3">
-            <p className="text-sm font-semibold">Controls</p>
+            <DrawerTitle>Controls</DrawerTitle>
             <DrawerClose render={<Button variant="ghost" />}>Close</DrawerClose>
           </div>
           <p className="p-5 text-sm text-muted-foreground">Density, edges and export live here.</p>
         </DrawerPopup>
       </Drawer>
     ),
-    code: `import { Drawer, DrawerClose, DrawerPopup, DrawerTrigger } from "@/components/ui/drawer"
+    code: `import { Drawer, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer"
 
 <Drawer>
   <DrawerTrigger render={<Button />}>Open controls</DrawerTrigger>
-  <DrawerPopup>…</DrawerPopup>
+  <DrawerPopup>
+    <DrawerTitle>Controls</DrawerTitle>
+    <DrawerClose render={<Button />}>Close</DrawerClose>
+  </DrawerPopup>
 </Drawer>`,
   },
   {

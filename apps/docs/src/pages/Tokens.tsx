@@ -27,7 +27,7 @@ function Swatch({ name, value }: { name: string; value: string }) {
 
 export function Tokens() {
   return (
-    <article className="mx-auto max-w-3xl">
+    <article>
       <h1 className="text-3xl font-semibold tracking-tight">Tokens</h1>
       <p className="mt-4 text-muted-foreground">
         Values generated from the DTCG sources in{" "}

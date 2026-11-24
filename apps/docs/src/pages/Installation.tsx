@@ -1,9 +1,10 @@
+import { CodeBlock } from "../components/CodeBlock";
 import { InstallCommand } from "../components/InstallCommand";
 import { installCommand, namespaceSnippet, SITE } from "../lib/site";
 
 export function Installation() {
   return (
-    <article className="mx-auto max-w-2xl">
+    <article>
       <h1 className="text-3xl font-semibold tracking-tight">Installation</h1>
       <p className="mt-4 text-muted-foreground">
         You need a React project with Tailwind CSS v4 and a{" "}
@@ -13,22 +14,21 @@ export function Installation() {
 
       <h2 className="mt-10 text-xl font-semibold">1. Add the theme</h2>
       <p className="mt-3 text-muted-foreground">
-        Install the token package and import it in your global CSS, after Tailwind:
-      </p>
-      <pre className="mt-4 overflow-auto rounded-lg bg-foreground p-4 text-[13px] leading-5 text-background">
-        <code>{`pnpm add @pseudonym-ui/tokens
-
-@import "tailwindcss";
-@import "@pseudonym-ui/tokens/theme.css";`}</code>
-      </pre>
-      <p className="mt-3 text-sm text-muted-foreground">
-        Until the package is published to npm, use the CSS from this repository (
-        <code className="font-mono">packages/tokens/dist/theme.css</code>
-        ) or add the theme item from the registry.
+        Add the theme item. The CLI writes the light and dark CSS variables and the Tailwind theme into your global CSS:
       </p>
       <div className="mt-3">
         <InstallCommand command={installCommand("theme")} />
       </div>
+      <p className="mt-3 text-sm text-muted-foreground">
+        Once <code className="font-mono">@pseudonym-ui/tokens</code> is published to npm, you can import the theme as a
+        package instead, so theme updates arrive with a version bump:
+      </p>
+      <CodeBlock className="mt-3 rounded-lg inset-ring inset-ring-border" lang="bash" code="pnpm add @pseudonym-ui/tokens" />
+      <CodeBlock
+        className="mt-3 rounded-lg inset-ring inset-ring-border"
+        lang="css"
+        code={`@import "tailwindcss";\n@import "@pseudonym-ui/tokens/theme.css";`}
+      />
 
       <h2 className="mt-10 text-xl font-semibold">2. Add a component</h2>
       <p className="mt-3 text-muted-foreground">Point the shadcn CLI at a registry item:</p>
@@ -41,9 +41,7 @@ export function Installation() {
         Register the namespace in <code className="font-mono text-[13px]">components.json</code> and then install with a
         short name:
       </p>
-      <pre className="mt-4 overflow-auto rounded-lg bg-foreground p-4 text-[13px] leading-5 text-background">
-        <code>{namespaceSnippet}</code>
-      </pre>
+      <CodeBlock className="mt-4 rounded-lg inset-ring inset-ring-border" lang="json" code={namespaceSnippet} />
       <div className="mt-3">
         <InstallCommand command="npx shadcn@latest add @pseudonym/button" />
       </div>

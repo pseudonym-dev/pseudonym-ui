@@ -4,7 +4,7 @@ import { SITE } from "../lib/site";
 
 export function Introduction() {
   return (
-    <article className="mx-auto max-w-2xl">
+    <article>
       <h1 className="text-3xl font-semibold tracking-tight">Introduction</h1>
       <p className="mt-4 text-muted-foreground">
         Pseudonym UI is the interface language of{" "}
