@@ -15,6 +15,23 @@ describe("DropZone", () => {
     expect(zone).toHaveAttribute("data-drag", "true");
   });
 
+  it("stays in the dragging state while the pointer moves over its children", () => {
+    render(
+      <DropZone>
+        <DropZoneTitle>Click to upload</DropZoneTitle>
+      </DropZone>,
+    );
+    const title = screen.getByText("Click to upload");
+    const zone = title.parentElement!;
+    fireEvent.dragOver(zone);
+    // jsdom has no DragEvent, so send a MouseEvent, which carries relatedTarget.
+    const leave = (relatedTarget: Element) => fireEvent(zone, new MouseEvent("dragleave", { bubbles: true, relatedTarget }));
+    leave(title);
+    expect(zone).toHaveAttribute("data-drag", "true");
+    leave(document.body);
+    expect(zone).not.toHaveAttribute("data-drag");
+  });
+
   it("forwards dropped files", () => {
     const onFiles = vi.fn();
     render(<DropZone onFiles={onFiles}>Drop</DropZone>);

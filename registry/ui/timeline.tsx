@@ -59,7 +59,10 @@ function Timeline({
       aria-valuenow={current}
       aria-label="Playhead"
       tabIndex={0}
-      className={cn("relative mt-3 h-14 cursor-pointer touch-none select-none", className)}
+      className={cn(
+        "relative mt-3 h-14 cursor-pointer touch-none rounded-lg outline-none select-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+        className,
+      )}
       onPointerDown={(event) => {
         event.currentTarget.setPointerCapture(event.pointerId);
         onSeek?.(timeAt(event.clientX));
@@ -76,6 +79,10 @@ function Timeline({
         if (event.key === "ArrowLeft") {
           event.preventDefault();
           onSeek?.(Math.max(0, current - step));
+        }
+        if (event.key === "Home" || event.key === "End") {
+          event.preventDefault();
+          onSeek?.(event.key === "Home" ? 0 : duration);
         }
       }}
       {...props}

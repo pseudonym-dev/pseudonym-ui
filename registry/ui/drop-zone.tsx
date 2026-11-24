@@ -26,7 +26,7 @@ function DropZone({ className, onFiles, onDragOver, onDragLeave, onDrop, childre
         onDragOver?.(event);
       }}
       onDragLeave={(event) => {
-        setDrag(false);
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDrag(false);
         onDragLeave?.(event);
       }}
       onDrop={(event) => {

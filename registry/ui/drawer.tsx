@@ -48,4 +48,8 @@ function DrawerClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.C
   return <DialogPrimitive.Close data-slot="drawer-close" {...props} />;
 }
 
-export { Drawer, DrawerBackdrop, DrawerClose, DrawerPopup, DrawerTrigger };
+function DrawerTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
+  return <DialogPrimitive.Title data-slot="drawer-title" className={cn("text-sm font-semibold", className)} {...props} />;
+}
+
+export { Drawer, DrawerBackdrop, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger };
