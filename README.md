@@ -13,18 +13,18 @@ You need a React + Tailwind CSS v4 project already initialised with `npx shadcn@
 ### Theme
 
 ```bash
+npx shadcn@latest add https://pseudonym-dev.github.io/pseudonym-ui/r/theme.json
+```
+
+This writes the light and dark CSS variables and the Tailwind theme into your global CSS. Once `@pseudonym-ui/tokens` is published to npm, you can import it as a package instead:
+
+```bash
 pnpm add @pseudonym-ui/tokens
 ```
 
 ```css
 @import "tailwindcss";
 @import "@pseudonym-ui/tokens/theme.css";
-```
-
-The package is ready to publish. Until it is on npm, use `packages/tokens/dist/theme.css` from this repository, or:
-
-```bash
-npx shadcn@latest add https://pseudonym-dev.github.io/pseudonym-ui/r/theme.json
 ```
 
 ### Components

@@ -12,6 +12,18 @@ const outDir = join(root, "apps/docs/public/r");
 
 const registry = JSON.parse(await readFile(join(root, "registry.json"), "utf8"));
 
+/** Turns the generated theme.css into shadcn `cssVars`, so the theme item needs no npm package. */
+async function themeCssVars() {
+  const css = await readFile(join(root, "packages/tokens/dist/theme.css"), "utf8");
+  const block = (selector) => {
+    const start = css.indexOf(`${selector} {`);
+    if (start === -1) throw new Error(`theme.css has no "${selector}" block`);
+    const body = css.slice(start, css.indexOf("\n}", start));
+    return Object.fromEntries([...body.matchAll(/^\s*--([\w-]+):\s*(.+);$/gm)].map((m) => [m[1], m[2]]));
+  };
+  return { theme: block("@theme inline"), light: block(":root"), dark: block('[data-theme="dark"]') };
+}
+
 await mkdir(outDir, { recursive: true });
 
 for (const item of registry.items) {
@@ -27,6 +39,7 @@ for (const item of registry.items) {
   if (item.registryDependencies) built.registryDependencies = item.registryDependencies;
   if (item.docs) built.docs = item.docs;
   if (item.cssVars) built.cssVars = item.cssVars;
+  if (item.type === "registry:theme") built.cssVars = await themeCssVars();
 
   built.files = [];
   for (const file of item.files ?? []) {

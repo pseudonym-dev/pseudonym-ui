@@ -23,12 +23,8 @@
       "name": "theme",
       "type": "registry:theme",
       "title": "Theme",
-      "description": "Install the Pseudonym UI CSS variables and Tailwind v4 theme.",
-      "files": [],
-      "dependencies": [
-        "@pseudonym-ui/tokens@0.1.0"
-      ],
-      "docs": "Add `@import \"@pseudonym-ui/tokens/theme.css\";` to your global CSS, after `@import \"tailwindcss\";`."
+      "description": "The Pseudonym UI light and dark CSS variables and Tailwind v4 theme, written into your global CSS.",
+      "files": []
     },
     {
       "name": "button",
