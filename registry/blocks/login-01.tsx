@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowRight, Mail } from "lucide-react";
+import { useId } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -10,6 +13,7 @@ import { asciiField } from "@/lib/ascii";
 const art = asciiField(64, 34, 2.1);
 
 export default function Login01() {
+  const id = useId();
   return (
     <div className="grid min-h-svh bg-background text-foreground lg:grid-cols-2">
       <div className="flex flex-col px-6 py-8 sm:px-12">
@@ -25,17 +29,17 @@ export default function Login01() {
           </div>
 
           <Field>
-            <FieldLabel htmlFor="login-email">Email</FieldLabel>
-            <Input id="login-email" type="email" autoComplete="email" placeholder="you@studio.dev" required />
+            <FieldLabel htmlFor={`${id}-email`}>Email</FieldLabel>
+            <Input id={`${id}-email`} type="email" autoComplete="email" placeholder="you@studio.dev" required />
           </Field>
           <Field>
             <div className="flex items-baseline justify-between">
-              <FieldLabel htmlFor="login-password">Password</FieldLabel>
+              <FieldLabel htmlFor={`${id}-password`}>Password</FieldLabel>
               <a href="#" className="text-sm font-medium text-brand-text hover:underline">
                 Forgot?
               </a>
             </div>
-            <Input id="login-password" type="password" autoComplete="current-password" required />
+            <Input id={`${id}-password`} type="password" autoComplete="current-password" required />
           </Field>
           <label className="flex items-center gap-2.5 text-sm text-secondary-foreground">
             <Switch defaultChecked />

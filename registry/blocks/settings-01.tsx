@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -32,6 +32,7 @@ function Section({ title, description, children }: { title: string; description:
 }
 
 export default function Settings01() {
+  const id = useId();
   const [density, setDensity] = useState(158);
 
   return (
@@ -48,7 +49,7 @@ export default function Settings01() {
                 href="#"
                 aria-current={i === 1 ? "page" : undefined}
                 className={cn(
-                  "shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground",
+                  "shrink-0 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/70",
                   i === 1 && "bg-accent text-foreground",
                   section === "Danger zone" && "text-destructive hover:text-destructive md:mt-4",
                 )}
@@ -62,21 +63,21 @@ export default function Settings01() {
             <Section title="Profile" description="How you appear on shared presets.">
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field>
-                  <FieldLabel htmlFor="settings-name">Display name</FieldLabel>
-                  <Input id="settings-name" defaultValue="Ana Lima" />
+                  <FieldLabel htmlFor={`${id}-name`}>Display name</FieldLabel>
+                  <Input id={`${id}-name`} defaultValue="Ana Lima" />
                 </Field>
                 <Field>
-                  <FieldLabel htmlFor="settings-handle">Handle</FieldLabel>
-                  <Input id="settings-handle" defaultValue="@ana" />
+                  <FieldLabel htmlFor={`${id}-handle`}>Handle</FieldLabel>
+                  <Input id={`${id}-handle`} defaultValue="@ana" />
                 </Field>
               </div>
             </Section>
 
             <Section title="Rendering" description="Defaults applied when you drop a new file.">
               <Field>
-                <FieldLabel id="settings-format-label">Default export format</FieldLabel>
+                <FieldLabel id={`${id}-format-label`}>Default export format</FieldLabel>
                 <Select defaultValue="gif" items={formats}>
-                  <SelectTrigger aria-labelledby="settings-format-label" className="sm:w-56">
+                  <SelectTrigger aria-labelledby={`${id}-format-label`} className="sm:w-56">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectPopup>
@@ -90,11 +91,11 @@ export default function Settings01() {
               </Field>
               <SliderField>
                 <SliderHead>
-                  <FieldLabel id="settings-density-label">Density</FieldLabel>
+                  <FieldLabel id={`${id}-density-label`}>Density</FieldLabel>
                   <FieldValue>{density} columns</FieldValue>
                 </SliderHead>
                 <Slider
-                  aria-labelledby="settings-density-label"
+                  aria-labelledby={`${id}-density-label`}
                   min={30}
                   max={220}
                   value={[density]}
@@ -103,16 +104,16 @@ export default function Settings01() {
                 <FieldHint>More columns keep detail, fewer read better on small screens.</FieldHint>
               </SliderField>
               <SwitchRow>
-                <Switch defaultChecked aria-labelledby="settings-glow" />
+                <Switch defaultChecked aria-labelledby={`${id}-glow`} />
                 <div>
-                  <SwitchLabel id="settings-glow">Glow</SwitchLabel>
+                  <SwitchLabel id={`${id}-glow`}>Glow</SwitchLabel>
                   <SwitchHint>Soft light bloom around bright characters.</SwitchHint>
                 </div>
               </SwitchRow>
               <SwitchRow>
-                <Switch aria-labelledby="settings-loop" />
+                <Switch aria-labelledby={`${id}-loop`} />
                 <div>
-                  <SwitchLabel id="settings-loop">Loop video previews</SwitchLabel>
+                  <SwitchLabel id={`${id}-loop`}>Loop video previews</SwitchLabel>
                   <SwitchHint>Restart clips when they reach the trim end.</SwitchHint>
                 </div>
               </SwitchRow>

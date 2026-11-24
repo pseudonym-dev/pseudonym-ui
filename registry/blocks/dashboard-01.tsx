@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowUpRight, Bell, Film, FolderOpen, LayoutDashboard, Search, Settings, Users } from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight, Bell, CircleCheck, Film, FolderOpen, LayoutDashboard, Search, Settings, Users } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { AreaChart, BarChart, ChartLegend } from "@/components/ui/chart";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsList, TabsTab } from "@/components/ui/tabs";
 import { TopBarBrandMark } from "@/components/ui/top-bar";
 import { cn } from "@/lib/utils";
@@ -28,10 +29,22 @@ const stats = [
   { label: "Avg. export time", value: "1.8 s", delta: "−0.4 s", trend: [9, 8, 8, 6, 6, 5, 4] },
 ];
 
+/** Short dates for the last `count` days, ending on Nov 24. */
+const lastDays = (count: number) =>
+  Array.from({ length: count }, (_, i) =>
+    new Date(Date.UTC(2026, 10, 24 - (count - 1 - i))).toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" }),
+  );
+
 const series = {
-  "7d": [32, 41, 38, 52, 49, 63, 71],
-  "30d": [18, 22, 20, 27, 31, 29, 35, 33, 40, 38, 45, 43, 49, 52, 48, 55, 60, 58, 63, 61, 66, 70, 68, 74, 72, 79, 83, 80, 86, 91],
+  "7d": { labels: lastDays(7), current: [32, 41, 38, 52, 49, 63, 71], previous: [28, 30, 35, 33, 41, 44, 47] },
+  "30d": {
+    labels: lastDays(30),
+    current: [18, 22, 20, 27, 31, 29, 35, 33, 40, 38, 45, 43, 49, 52, 48, 55, 60, 58, 63, 61, 66, 70, 68, 74, 72, 79, 83, 80, 86, 91],
+    previous: [15, 17, 19, 18, 22, 25, 24, 27, 26, 30, 31, 29, 33, 36, 35, 37, 40, 39, 43, 45, 44, 47, 49, 48, 52, 55, 54, 57, 59, 62],
+  },
 };
+
+const hours = Array.from({ length: 12 }, (_, i) => `${String(8 + i).padStart(2, "0")}:00`);
 
 const exports = [
   { name: "toucan-profile.mp4", format: "MP4", progress: 100 },
@@ -40,8 +53,24 @@ const exports = [
   { name: "launch-trailer.mp4", format: "MP4", progress: 34 },
 ];
 
+const filters = {
+  all: () => true,
+  running: (item: (typeof exports)[number]) => item.progress < 100,
+  failed: () => false,
+};
+
 export default function Dashboard01() {
   const [range, setRange] = useState<keyof typeof series>("30d");
+  const [filter, setFilter] = useState<keyof typeof filters>("all");
+  const [loading, setLoading] = useState(false);
+  const visible = exports.filter(filters[filter]);
+
+  // Stands in for a request: show skeleton rows briefly whenever the filter changes.
+  useEffect(() => {
+    if (!loading) return;
+    const id = window.setTimeout(() => setLoading(false), 700);
+    return () => window.clearTimeout(id);
+  }, [loading]);
 
   return (
     <div className="flex min-h-svh bg-muted/40 text-foreground">
@@ -57,7 +86,7 @@ export default function Dashboard01() {
               href="#"
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex h-9 items-center gap-2.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground",
+                "flex h-9 items-center gap-2.5 rounded-lg px-2.5 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/70",
                 active && "bg-accent text-foreground",
               )}
             >
@@ -89,7 +118,10 @@ export default function Dashboard01() {
         <main className="flex flex-col gap-5 p-6">
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {stats.map((stat) => (
-              <Card key={stat.label} className="gap-1 p-5">
+              <Card
+                key={stat.label}
+                className="gap-1 p-5 transition-[translate,box-shadow] duration-200 ease-(--ease) hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              >
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
                 <div className="flex items-end justify-between gap-3">
                   <p className="text-2xl font-semibold tracking-tight tabular-nums">{stat.value}</p>
@@ -118,48 +150,99 @@ export default function Dashboard01() {
                   </TabsList>
                 </Tabs>
               </div>
-              <AreaChart data={series[range]} aria-label="Exports over time" className="h-52" />
-              <ChartLegend>
-                <span>{range === "7d" ? "Mon" : "Oct 26"}</span>
-                <span>{range === "7d" ? "Sun" : "Nov 24"}</span>
-              </ChartLegend>
+              <AreaChart
+                aria-label="Exports over time"
+                data={series[range].current}
+                compare={series[range].previous}
+                labels={series[range].labels}
+                name="Exports"
+                compareName="Previous period"
+                className="h-56"
+              />
+              <ChartLegend
+                items={[
+                  { label: "Exports", color: "var(--chart-2)" },
+                  { label: "Previous period", color: "var(--chart-4)", dashed: true },
+                ]}
+              />
             </Card>
 
             <Card className="gap-4 p-5">
               <div>
                 <h2 className="text-sm font-semibold">Renders by hour</h2>
-                <p className="text-xs text-muted-foreground">Today, peak at 18:00</p>
+                <p className="text-xs text-muted-foreground">Today, peak at 19:00</p>
               </div>
-              <BarChart data={[3, 5, 4, 7, 9, 6, 8, 11, 10, 13, 12, 16]} aria-label="Renders by hour" className="h-52" />
-              <ChartLegend>
-                <span>08:00</span>
-                <span>19:00</span>
-              </ChartLegend>
+              <BarChart
+                aria-label="Renders by hour"
+                data={[3, 5, 4, 7, 9, 6, 8, 11, 10, 13, 12, 16]}
+                labels={hours}
+                name="Renders"
+                className="h-56"
+              />
             </Card>
           </div>
 
           <Card className="gap-0 p-0">
-            <div className="flex items-center justify-between px-5 py-4">
+            <div className="flex flex-wrap items-center gap-3 px-5 py-4">
               <h2 className="text-sm font-semibold">Recent exports</h2>
+              <Tabs
+                value={filter}
+                onValueChange={(value) => {
+                  setFilter(value as keyof typeof filters);
+                  setLoading(true);
+                }}
+                className="ml-auto"
+              >
+                <TabsList>
+                  {(["all", "running", "failed"] as const).map((value) => (
+                    <TabsTab key={value} value={value} className="h-7 px-2.5 text-xs capitalize">
+                      {value}
+                    </TabsTab>
+                  ))}
+                </TabsList>
+              </Tabs>
               <Button variant="ghost" className="h-8">
                 View all
                 <ArrowUpRight />
               </Button>
             </div>
-            <ul className="divide-y divide-border border-t border-border">
-              {exports.map((item) => (
-                <li key={item.name} className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 px-5 py-3 sm:grid-cols-[1fr_120px_160px]">
-                  <span className="truncate font-mono text-sm">{item.name}</span>
-                  <Badge tone="plain" className="justify-self-end sm:justify-self-start">
-                    {item.format}
-                  </Badge>
-                  <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
-                    <Progress value={item.progress} className="flex-1" />
-                    <span className="w-9 text-right text-xs tabular-nums text-muted-foreground">{item.progress}%</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {loading ? (
+              <ul aria-label="Loading exports" aria-busy className="divide-y divide-border border-t border-border">
+                {[0, 1, 2].map((row) => (
+                  <li key={row} className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 px-5 py-3.5 sm:grid-cols-[1fr_120px_160px]">
+                    <Skeleton className="h-4 w-40" />
+                    <Skeleton className="h-5 w-11 rounded-full" />
+                    <Skeleton className="col-span-2 h-2 sm:col-span-1" />
+                  </li>
+                ))}
+              </ul>
+            ) : visible.length === 0 ? (
+              <div className="flex flex-col items-center border-t border-border px-5 py-10 text-center">
+                <span className="grid size-10 place-items-center rounded-full bg-muted inset-ring inset-ring-border">
+                  <CircleCheck className="size-5 text-brand-text" strokeWidth={1.75} />
+                </span>
+                <p className="mt-3 text-sm font-semibold">No failed exports</p>
+                <p className="mt-1 text-sm text-muted-foreground">Everything rendered cleanly this week.</p>
+              </div>
+            ) : (
+              <ul className="divide-y divide-border border-t border-border">
+                {visible.map((item) => (
+                  <li
+                    key={item.name}
+                    className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 px-5 py-3 transition-colors duration-150 hover:bg-muted/60 sm:grid-cols-[1fr_120px_160px]"
+                  >
+                    <span className="truncate font-mono text-sm">{item.name}</span>
+                    <Badge tone="plain" className="justify-self-end sm:justify-self-start">
+                      {item.format}
+                    </Badge>
+                    <div className="col-span-2 flex items-center gap-3 sm:col-span-1">
+                      <Progress value={item.progress} className="flex-1" />
+                      <span className="w-9 text-right text-xs tabular-nums text-muted-foreground">{item.progress}%</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </Card>
         </main>
       </div>

@@ -44,7 +44,7 @@ export default function Sidebar02() {
       <aside
         data-collapsed={collapsed || undefined}
         className={cn(
-          "flex shrink-0 flex-col rounded-2xl border border-border bg-card p-3 shadow-sm transition-[width] duration-200",
+          "flex shrink-0 flex-col rounded-2xl border border-border bg-card p-3 shadow-sm transition-[width] duration-200 ease-(--ease) motion-reduce:transition-none",
           collapsed ? "w-[68px]" : "w-64",
         )}
       >
@@ -81,7 +81,7 @@ export default function Sidebar02() {
                       title={collapsed ? label : undefined}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "relative flex h-10 items-center gap-3 rounded-xl px-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground",
+                        "relative flex h-10 items-center gap-3 rounded-xl px-2.5 text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/70",
                         active && "bg-primary/15 text-foreground before:absolute before:inset-y-2.5 before:-left-3 before:w-1 before:rounded-r-full before:bg-primary",
                         collapsed && "justify-center px-0",
                       )}

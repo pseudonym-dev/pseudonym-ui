@@ -1,7 +1,7 @@
 "use client";
 
 import { Copy, Download, FileText, Pause, Play, Repeat, Star } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -21,6 +21,7 @@ const backgrounds = [
 ];
 
 export default function Editor01() {
+  const id = useId();
   const [density, setDensity] = useState(158);
   const [glow, setGlow] = useState(true);
   const [background, setBackground] = useState("black");
@@ -89,11 +90,11 @@ export default function Editor01() {
               <SidebarTitle>Characters</SidebarTitle>
               <SliderField>
                 <SliderHead>
-                  <FieldLabel id="editor-density">Density</FieldLabel>
+                  <FieldLabel id={`${id}-density`}>Density</FieldLabel>
                   <FieldValue>{density} columns</FieldValue>
                 </SliderHead>
                 <Slider
-                  aria-labelledby="editor-density"
+                  aria-labelledby={`${id}-density`}
                   min={60}
                   max={220}
                   value={[density]}
@@ -105,16 +106,16 @@ export default function Editor01() {
               <SidebarTitle>Style</SidebarTitle>
               <div className="flex flex-col gap-4">
                 <SwitchRow>
-                  <Switch checked={glow} onCheckedChange={setGlow} aria-labelledby="editor-glow" />
+                  <Switch checked={glow} onCheckedChange={setGlow} aria-labelledby={`${id}-glow`} />
                   <div>
-                    <SwitchLabel id="editor-glow">Glow</SwitchLabel>
+                    <SwitchLabel id={`${id}-glow`}>Glow</SwitchLabel>
                     <SwitchHint>Soft light bloom around bright characters.</SwitchHint>
                   </div>
                 </SwitchRow>
                 <div className="flex flex-col gap-1.5">
-                  <FieldLabel id="editor-background">Background</FieldLabel>
+                  <FieldLabel id={`${id}-background`}>Background</FieldLabel>
                   <Select value={background} onValueChange={(value) => setBackground(value as string)} items={backgrounds}>
-                    <SelectTrigger aria-labelledby="editor-background">
+                    <SelectTrigger aria-labelledby={`${id}-background`}>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectPopup>

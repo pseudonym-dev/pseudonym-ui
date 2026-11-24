@@ -58,7 +58,9 @@ export default function Pricing01() {
           {plans.map((plan) => (
             <Card
               key={plan.name}
-              className={cn("gap-6 p-6", plan.featured && "ring-2 ring-primary md:-my-3 md:py-9")}
+              className={cn(
+                "gap-6 p-6 transition-[translate,box-shadow] duration-200 ease-(--ease) hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+                plan.featured && "ring-2 ring-primary md:-my-3 md:py-9")}
             >
               <div>
                 <div className="flex items-center justify-between">

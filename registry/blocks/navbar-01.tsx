@@ -36,7 +36,7 @@ export default function Navbar01() {
                         type="button"
                         onClick={() => setActive(tab)}
                         className={cn(
-                          "h-10 rounded-lg px-3 text-left text-sm font-medium text-muted-foreground hover:bg-accent",
+                          "h-10 rounded-lg px-3 text-left text-sm font-medium text-muted-foreground transition-colors duration-150 hover:bg-accent hover:text-foreground active:bg-accent/70",
                           active === tab && "bg-accent text-foreground",
                         )}
                       />
@@ -51,7 +51,7 @@ export default function Navbar01() {
 
           <TopBarBrandMark>P_</TopBarBrandMark>
           <nav aria-label="Breadcrumb" className="hidden items-center gap-1.5 text-sm sm:flex">
-            <a href="#" className="font-medium text-muted-foreground hover:text-foreground">
+            <a href="#" className="font-medium text-muted-foreground transition-colors duration-150 hover:text-foreground">
               Pseudonym Studio
             </a>
             <ChevronRight className="size-4 text-fg-quaternary" />
@@ -92,7 +92,7 @@ export default function Navbar01() {
               aria-current={active === tab ? "page" : undefined}
               onClick={() => setActive(tab)}
               className={cn(
-                "relative h-11 shrink-0 px-3 text-sm font-medium text-muted-foreground outline-none hover:text-foreground focus-visible:text-foreground",
+                "relative h-11 shrink-0 px-3 text-sm font-medium text-muted-foreground outline-none transition-colors duration-150 hover:text-foreground focus-visible:text-foreground",
                 "after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:rounded-full",
                 active === tab && "text-foreground after:bg-primary",
               )}

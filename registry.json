@@ -357,10 +357,28 @@
       ]
     },
     {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "A pulsing placeholder for content that is still loading.",
+      "files": [
+        {
+          "path": "registry/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
       "name": "hero-01",
       "type": "registry:block",
       "title": "Hero",
       "description": "Landing navbar and hero with an ASCII preview window.",
+      "categories": [
+        "marketing"
+      ],
       "files": [
         {
           "path": "registry/blocks/hero-01.tsx",
@@ -383,6 +401,9 @@
       "type": "registry:block",
       "title": "Pricing",
       "description": "Three plan cards with a monthly / yearly switch.",
+      "categories": [
+        "marketing"
+      ],
       "files": [
         {
           "path": "registry/blocks/pricing-01.tsx",
@@ -405,6 +426,9 @@
       "type": "registry:block",
       "title": "Login",
       "description": "Split sign-in screen with an ASCII art panel.",
+      "categories": [
+        "authentication"
+      ],
       "files": [
         {
           "path": "registry/blocks/login-01.tsx",
@@ -429,6 +453,9 @@
       "type": "registry:block",
       "title": "Dashboard",
       "description": "Sidebar, stat cards with sparklines, charts and an exports list.",
+      "categories": [
+        "dashboard"
+      ],
       "files": [
         {
           "path": "registry/blocks/dashboard-01.tsx",
@@ -445,6 +472,7 @@
         "https://pseudonym-dev.github.io/pseudonym-ui/r/chart.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/progress.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/skeleton.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/tabs.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
@@ -455,6 +483,9 @@
       "type": "registry:block",
       "title": "Charts",
       "description": "Area, bar, ring and bar-list charts in a card grid.",
+      "categories": [
+        "charts"
+      ],
       "files": [
         {
           "path": "registry/blocks/charts-01.tsx",
@@ -476,6 +507,9 @@
       "type": "registry:block",
       "title": "Icon rail sidebar",
       "description": "A dark icon rail with tooltips plus a library panel.",
+      "categories": [
+        "sidebar"
+      ],
       "files": [
         {
           "path": "registry/blocks/sidebar-01.tsx",
@@ -489,6 +523,7 @@
         "https://pseudonym-dev.github.io/pseudonym-ui/r/ascii.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/skeleton.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/tooltip.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
@@ -499,6 +534,9 @@
       "type": "registry:block",
       "title": "Floating sidebar",
       "description": "An inset sidebar with a workspace switcher that collapses to icons.",
+      "categories": [
+        "sidebar"
+      ],
       "files": [
         {
           "path": "registry/blocks/sidebar-02.tsx",
@@ -521,6 +559,9 @@
       "type": "registry:block",
       "title": "App navbar",
       "description": "Breadcrumbs, search with a shortcut hint, underline tabs and a mobile drawer.",
+      "categories": [
+        "navigation"
+      ],
       "files": [
         {
           "path": "registry/blocks/navbar-01.tsx",
@@ -543,6 +584,9 @@
       "type": "registry:block",
       "title": "Settings",
       "description": "Settings page with section nav, form fields, switches and a danger zone.",
+      "categories": [
+        "application"
+      ],
       "files": [
         {
           "path": "registry/blocks/settings-01.tsx",
@@ -565,6 +609,9 @@
       "type": "registry:block",
       "title": "Editor",
       "description": "The ASCII Studio editor: canvas, inspector sidebar and timeline.",
+      "categories": [
+        "application"
+      ],
       "files": [
         {
           "path": "registry/blocks/editor-01.tsx",

@@ -4,7 +4,7 @@ import { type ReactNode, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
-import { AreaChart, BarChart } from "@/components/ui/chart";
+import { AreaChart, BarChart, ChartLegend } from "@/components/ui/chart";
 import { Card, CardDescription, CardFooter, CardMedia, CardTitle } from "@/components/ui/card";
 import { Drawer, DrawerClose, DrawerPopup, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { DropZone, DropZoneIcon, DropZoneTitle } from "@/components/ui/drop-zone";
@@ -12,6 +12,7 @@ import { Field, FieldGrid, FieldHint, FieldLabel, FieldValue } from "@/component
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Sidebar, SidebarBody, SidebarDisabled, SidebarSection, SidebarTitle } from "@/components/ui/sidebar";
 import { Slider, SliderField, SliderHead } from "@/components/ui/slider";
 import { Switch, SwitchHint, SwitchLabel, SwitchRow } from "@/components/ui/switch";
@@ -497,22 +498,74 @@ const formats = [
   {
     slug: "chart",
     title: "Chart",
-    description: "Lightweight SVG area and bar charts drawn with the chart tokens. No chart library.",
+    description:
+      "Area and bar charts in plain SVG, drawn with the chart tokens. Pass labels to get axes and a hover tooltip; arrow keys read each value. No chart library.",
     item: "chart",
     preview: (
-      <div className="grid w-full max-w-xl gap-6 sm:grid-cols-2">
-        <AreaChart data={[12, 18, 15, 24, 22, 31, 29, 38]} aria-label="Exports" className="h-32" />
-        <BarChart data={[5, 8, 6, 9, 12, 7, 14]} aria-label="Renders" className="h-32" />
+      <div className="grid w-full max-w-2xl gap-6 sm:grid-cols-2">
+        <div className="flex flex-col gap-3">
+          <AreaChart
+            aria-label="Exports"
+            data={[12, 18, 15, 24, 22, 31, 29, 38]}
+            compare={[10, 12, 14, 15, 19, 18, 22, 25]}
+            labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"]}
+            name="Exports"
+            className="h-44"
+          />
+          <ChartLegend
+            items={[
+              { label: "Exports", color: "var(--chart-2)" },
+              { label: "Previous", color: "var(--chart-4)", dashed: true },
+            ]}
+          />
+        </div>
+        <BarChart
+          aria-label="Renders"
+          data={[5, 8, 6, 9, 12, 7, 14]}
+          labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
+          name="Renders"
+          className="h-44"
+        />
       </div>
     ),
     code: `import { AreaChart, BarChart, ChartLegend } from "@/components/ui/chart"
 
-<AreaChart data={[12, 18, 15, 24, 22, 31]} aria-label="Exports" />
-<BarChart data={[5, 8, 6, 9, 12, 7]} aria-label="Renders" />
-<ChartLegend>
-  <span>Mon</span>
-  <span>Sun</span>
-</ChartLegend>`,
+<AreaChart
+  aria-label="Exports"
+  data={[12, 18, 15, 24, 22, 31]}
+  compare={[10, 12, 14, 15, 19, 18]}
+  labels={["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]}
+  name="Exports"
+/>
+<ChartLegend
+  items={[
+    { label: "Exports", color: "var(--chart-2)" },
+    { label: "Previous", color: "var(--chart-4)", dashed: true },
+  ]}
+/>
+
+<BarChart aria-label="Renders" data={[5, 8, 6, 9]} labels={["Mon", "Tue", "Wed", "Thu"]} name="Renders" />
+
+{/* Without labels you get a sparkline */}
+<AreaChart aria-label="Trend" data={[4, 6, 5, 8]} className="h-8 w-20" />`,
+  },
+  {
+    slug: "skeleton",
+    title: "Skeleton",
+    description: "A pulsing placeholder for content that is still loading. It stays still when reduced motion is on.",
+    item: "skeleton",
+    preview: (
+      <div className="flex w-72 items-center gap-3">
+        <Skeleton className="size-10 rounded-full" />
+        <div className="flex flex-1 flex-col gap-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-3 w-1/2" />
+        </div>
+      </div>
+    ),
+    code: `import { Skeleton } from "@/components/ui/skeleton"
+
+<Skeleton className="h-4 w-40" />`,
   },
 ];
 

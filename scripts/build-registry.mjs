@@ -41,6 +41,7 @@ for (const item of registry.items) {
   if (item.devDependencies) built.devDependencies = item.devDependencies;
   if (item.registryDependencies) built.registryDependencies = item.registryDependencies;
   if (item.docs) built.docs = item.docs;
+  if (item.categories) built.categories = item.categories;
   if (item.cssVars) built.cssVars = item.cssVars;
   if (item.type === "registry:theme") built.cssVars = await themeCssVars();
 

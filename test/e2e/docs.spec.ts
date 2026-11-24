@@ -60,3 +60,11 @@ test("theme item does not mirror breakpoints into consumers' @theme", async ({ r
   const body = await (await request.get("/r/theme.json")).json();
   expect(Object.keys(body.cssVars.light).filter((name) => name.startsWith("breakpoint-"))).toEqual([]);
 });
+
+test("block charts show a tooltip on hover", async ({ page }) => {
+  await page.goto("/view/dashboard-01");
+  const plot = page.getByLabel(/^Exports over time\. Use the arrow keys/);
+  const box = (await plot.boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page.getByText("Previous period").nth(1)).toBeVisible();
+});

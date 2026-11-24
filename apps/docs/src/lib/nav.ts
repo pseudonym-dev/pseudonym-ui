@@ -29,6 +29,7 @@ export const docsNav = [
       { to: "/docs/components/input", label: "Input" },
       { to: "/docs/components/top-bar", label: "Top Bar" },
       { to: "/docs/components/sidebar", label: "Sidebar" },
+      { to: "/docs/components/skeleton", label: "Skeleton" },
       { to: "/docs/components/timeline", label: "Timeline" },
       { to: "/docs/components/theme-toggle", label: "Theme Toggle" },
     ],

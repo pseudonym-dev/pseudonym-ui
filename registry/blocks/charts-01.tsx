@@ -4,7 +4,7 @@ import { TrendingUp } from "lucide-react";
 import { useState } from "react";
 
 import { Card } from "@/components/ui/card";
-import { AreaChart, BarChart, ChartLegend } from "@/components/ui/chart";
+import { AreaChart, BarChart } from "@/components/ui/chart";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const ranges = [
@@ -13,8 +13,14 @@ const ranges = [
 ];
 
 const visitors = {
-  "12w": [420, 510, 480, 620, 590, 710, 680, 790, 860, 820, 940, 1020],
-  "12m": [2100, 2400, 2250, 2900, 3100, 2950, 3400, 3800, 3650, 4100, 4500, 4820],
+  "12w": {
+    labels: ["Sep 8", "Sep 15", "Sep 22", "Sep 29", "Oct 6", "Oct 13", "Oct 20", "Oct 27", "Nov 3", "Nov 10", "Nov 17", "Nov 24"],
+    data: [420, 510, 480, 620, 590, 710, 680, 790, 860, 820, 940, 1020],
+  },
+  "12m": {
+    labels: ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
+    data: [2100, 2400, 2250, 2900, 3100, 2950, 3400, 3800, 3650, 4100, 4500, 4820],
+  },
 };
 
 const formats = [
@@ -24,7 +30,7 @@ const formats = [
   { label: "Text", value: 9 },
 ];
 
-const days = ["M", "T", "W", "T", "F", "S", "S"];
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 function Ring({ value, label }: { value: number; label: string }) {
   const circumference = 2 * Math.PI * 15.9;
@@ -53,7 +59,7 @@ function Ring({ value, label }: { value: number; label: string }) {
 
 export default function Charts01() {
   const [range, setRange] = useState<keyof typeof visitors>("12w");
-  const data = visitors[range];
+  const { data, labels } = visitors[range];
   const growth = Math.round((data.at(-1)! / data[0] - 1) * 100);
 
   return (
@@ -83,39 +89,28 @@ export default function Charts01() {
               </SelectPopup>
             </Select>
           </div>
-          <AreaChart data={data} aria-label="Studio visitors" className="h-56" />
-          <ChartLegend>
-            <span>{range === "12w" ? "Sep 1" : "Dec 2025"}</span>
-            <span>{range === "12w" ? "Nov 24" : "Nov 2026"}</span>
-          </ChartLegend>
+          <AreaChart aria-label="Studio visitors" data={data} labels={labels} name="Visitors" className="h-60" />
         </Card>
 
-        <Card className="items-center justify-center gap-4 p-5">
+        <Card className="items-center gap-4 p-5">
           <p className="self-start text-sm text-muted-foreground">Render quota</p>
-          <Ring value={72} label="of 500 min" />
+          <div className="my-auto"><Ring value={72} label="of 500 min" /></div>
           <p className="text-center text-xs text-muted-foreground">Resets in 6 days</p>
         </Card>
 
         <Card className="gap-4 p-5">
           <p className="text-sm text-muted-foreground">Exports this week</p>
-          <BarChart data={[38, 52, 47, 61, 74, 33, 29]} aria-label="Exports per day" className="h-36" />
-          <ChartLegend>
-            {days.map((day, i) => (
-              <span key={i} className="w-full text-center">
-                {day}
-              </span>
-            ))}
-          </ChartLegend>
+          <BarChart aria-label="Exports per day" data={[38, 52, 47, 61, 74, 33, 29]} labels={days} name="Exports" className="h-44" />
         </Card>
 
         <Card className="gap-4 p-5">
           <p className="text-sm text-muted-foreground">Formats</p>
           <ul className="flex flex-col gap-3">
             {formats.map((format) => (
-              <li key={format.label} className="grid grid-cols-[48px_1fr_40px] items-center gap-3 text-sm">
+              <li key={format.label} className="group grid grid-cols-[48px_1fr_40px] items-center gap-3 text-sm">
                 <span className="font-medium">{format.label}</span>
                 <span className="h-2 overflow-hidden rounded-full bg-border">
-                  <span className="block h-full rounded-full bg-(--chart-2)" style={{ width: `${format.value}%` }} />
+                  <span className="block h-full rounded-full bg-(--chart-2) transition-opacity duration-150 group-hover:opacity-80" style={{ width: `${format.value}%` }} />
                 </span>
                 <span className="text-right tabular-nums text-muted-foreground">{format.value}%</span>
               </li>
@@ -128,7 +123,12 @@ export default function Charts01() {
           <p className="text-3xl font-semibold tracking-tight tabular-nums">
             1.8<span className="text-lg text-muted-foreground"> s</span>
           </p>
-          <AreaChart data={[3.1, 2.9, 2.6, 2.7, 2.3, 2.1, 2, 1.9, 1.8]} aria-label="Average export time" className="mt-auto h-16 text-muted-foreground" />
+          <AreaChart
+            aria-label="Average export time"
+            data={[3.1, 2.9, 2.6, 2.7, 2.3, 2.1, 2, 1.9, 1.8]}
+            color="var(--muted-foreground)"
+            className="mt-auto h-16"
+          />
           <p className="text-xs text-muted-foreground">Down 42% since the WebCodecs encoder.</p>
         </Card>
       </div>
