@@ -1,0 +1,322 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "pseudonym",
+  "homepage": "https://pseudonym-dev.github.io/pseudonym-ui",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "The cn helper used by every Pseudonym UI component.",
+      "files": [
+        {
+          "path": "registry/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ]
+    },
+    {
+      "name": "theme",
+      "type": "registry:theme",
+      "title": "Theme",
+      "description": "Install the Pseudonym UI CSS variables and Tailwind v4 theme.",
+      "files": [],
+      "dependencies": [
+        "@pseudonym-ui/tokens@0.1.0"
+      ],
+      "docs": "Add `@import \"@pseudonym-ui/tokens/theme.css\";` to your global CSS, after `@import \"tailwindcss\";`."
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Primary, secondary, ghost and icon buttons with the ASCII Studio chrome.",
+      "files": [
+        {
+          "path": "registry/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "A joined row of actions, used for export formats.",
+      "files": [
+        {
+          "path": "registry/ui/button-group.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A pill badge with an optional lime status dot.",
+      "files": [
+        {
+          "path": "registry/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Label, hint and grid layout for form controls.",
+      "files": [
+        {
+          "path": "registry/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "A 36\u00d720 toggle with a lime track when on.",
+      "files": [
+        {
+          "path": "registry/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A range slider with a lime fill and ringed thumb.",
+      "files": [
+        {
+          "path": "registry/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "A thin lime progress bar.",
+      "files": [
+        {
+          "path": "registry/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "A segmented control in the style of Adjust / Export.",
+      "files": [
+        {
+          "path": "registry/ui/tabs.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "An accessible hover and focus tooltip.",
+      "files": [
+        {
+          "path": "registry/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "A 40px select trigger with a chevron, built on Base UI.",
+      "files": [
+        {
+          "path": "registry/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Media card with a 16:9 frame, title and credit line.",
+      "files": [
+        {
+          "path": "registry/ui/card.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "drop-zone",
+      "type": "registry:ui",
+      "title": "Drop Zone",
+      "description": "A drag-and-drop target with a lime ring while dragging.",
+      "files": [
+        {
+          "path": "registry/ui/drop-zone.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A right-side drawer with a scrim, for mobile controls.",
+      "files": [
+        {
+          "path": "registry/ui/drawer.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "top-bar",
+      "type": "registry:ui",
+      "title": "Top Bar",
+      "description": "A 60px application top bar with a brand mark.",
+      "files": [
+        {
+          "path": "registry/ui/top-bar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "A 320px inspector sidebar, including a disabled empty state.",
+      "files": [
+        {
+          "path": "registry/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Video transport and a trim / playhead timeline.",
+      "files": [
+        {
+          "path": "registry/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "theme-toggle",
+      "type": "registry:ui",
+      "title": "Theme Toggle",
+      "description": "Light and dark theme provider plus a toggle button.",
+      "files": [
+        {
+          "path": "registry/ui/theme-toggle.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json"
+      ]
+    }
+  ]
+}

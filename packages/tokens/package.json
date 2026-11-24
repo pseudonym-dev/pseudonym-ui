@@ -1,0 +1,22 @@
+{
+  "name": "@pseudonym-ui/tokens",
+  "version": "0.1.0",
+  "description": "Design tokens and Tailwind v4 theme for Pseudonym UI.",
+  "type": "module",
+  "exports": {
+    ".": "./dist/theme.css",
+    "./theme.css": "./dist/theme.css",
+    "./tokens.json": "./dist/tokens.json"
+  },
+  "files": ["dist", "src"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "node -e \"process.exit(0)\""
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.1.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

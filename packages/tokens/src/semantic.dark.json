@@ -1,0 +1,48 @@
+{
+  "theme": {
+    "dark": {
+      "background": { "$type": "color", "$value": "{color.neutral.950}" },
+      "foreground": { "$type": "color", "$value": "{color.neutral.50}" },
+      "card": { "$type": "color", "$value": "{color.neutral.950}" },
+      "card-foreground": { "$type": "color", "$value": "{color.neutral.50}" },
+      "popover": { "$type": "color", "$value": "{color.neutral.900}" },
+      "popover-foreground": { "$type": "color", "$value": "{color.neutral.50}" },
+      "primary": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "primary-foreground": { "$type": "color", "$value": "{color.brand.on}" },
+      "secondary": { "$type": "color", "$value": "{color.neutral.950}" },
+      "secondary-foreground": { "$type": "color", "$value": "{color.neutral.300}" },
+      "muted": { "$type": "color", "$value": "{color.neutral.900}" },
+      "muted-foreground": { "$type": "color", "$value": "{color.neutral.400}" },
+      "accent": { "$type": "color", "$value": "{color.neutral.900}" },
+      "accent-foreground": { "$type": "color", "$value": "{color.neutral.300}" },
+      "destructive": { "$type": "color", "$value": "{color.destructive.dark}" },
+      "border": { "$type": "color", "$value": "{color.neutral.800}" },
+      "input": { "$type": "color", "$value": "{color.neutral.700}" },
+      "ring": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "sidebar": { "$type": "color", "$value": "{color.neutral.950}" },
+      "sidebar-foreground": { "$type": "color", "$value": "{color.neutral.50}" },
+      "sidebar-primary": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "sidebar-primary-foreground": { "$type": "color", "$value": "{color.brand.on}" },
+      "sidebar-accent": { "$type": "color", "$value": "{color.neutral.900}" },
+      "sidebar-accent-foreground": { "$type": "color", "$value": "{color.neutral.50}" },
+      "sidebar-border": { "$type": "color", "$value": "{color.neutral.800}" },
+      "sidebar-ring": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "brand-hover": { "$type": "color", "$value": "{color.brand.hover}" },
+      "brand-text": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "brand-fill": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "fg-quaternary": { "$type": "color", "$value": "{color.neutral.600}" },
+      "overlay": { "$type": "color", "$value": "rgba(10, 10, 10, 0.85)" },
+      "dots": { "$type": "color", "$value": "rgba(255, 255, 255, 0.06)" },
+      "stripes": { "$type": "color", "$value": "rgba(255, 255, 255, 0.04)" },
+      "chart-1": { "$type": "color", "$value": "{color.brand.DEFAULT}" },
+      "chart-2": { "$type": "color", "$value": "{color.brand.fill}" },
+      "chart-3": { "$type": "color", "$value": "{color.neutral.400}" },
+      "chart-4": { "$type": "color", "$value": "{color.neutral.300}" },
+      "chart-5": { "$type": "color", "$value": "{color.neutral.600}" },
+      "canvas-shadow": {
+        "$type": "shadow",
+        "$value": "0 0 0 1px var(--border), 0 24px 48px -12px rgba(0, 0, 0, 0.7)"
+      }
+    }
+  }
+}
