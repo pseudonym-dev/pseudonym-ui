@@ -13,7 +13,7 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   webServer: {
-    command: "pnpm build && pnpm --filter @pseudonym-ui/docs exec vite preview --host 127.0.0.1 --port 4173",
+    command: "pnpm build && node scripts/serve-pages.mjs apps/docs/dist 4173",
     url: base,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

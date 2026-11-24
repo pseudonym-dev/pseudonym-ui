@@ -68,3 +68,26 @@ test("block charts show a tooltip on hover", async ({ page }) => {
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await expect(page.getByText("Previous period").nth(1)).toBeVisible();
 });
+
+test("GitHub Pages fallback serves the SPA for nested routes and leaves registry files alone", async ({ page, request }) => {
+  const index = await request.get("/");
+  const fallback = await request.get("/404.html");
+  expect(index.ok()).toBeTruthy();
+  expect(fallback.ok()).toBeTruthy();
+  const html = await fallback.text();
+  expect(html).toBe(await index.text());
+  // Asset URLs must be root-absolute so 404.html still loads them from /docs/... or /view/....
+  expect(html).toMatch(/src="\/(?:pseudonym-ui\/)?assets\/[^"]+\.js"/);
+  expect(html).toMatch(/href="\/(?:pseudonym-ui\/)?assets\/[^"]+\.css"/);
+
+  const registry = await request.get("/r/button.json");
+  expect(registry.ok()).toBeTruthy();
+  expect((await registry.json()).name).toBe("button");
+
+  const nested = await request.get("/view/hero-01");
+  expect(nested.status()).toBe(404);
+  expect(await nested.text()).toBe(html);
+
+  await page.goto("/view/hero-01");
+  await expect(page.getByRole("heading", { name: /Turn any clip into living ASCII/ })).toBeVisible();
+});
