@@ -97,7 +97,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "A 36\u00d720 toggle with a lime track when on.",
+      "description": "A 36×20 toggle with a lime track when on.",
       "files": [
         {
           "path": "registry/ui/switch.tsx",
@@ -312,6 +312,280 @@
       "registryDependencies": [
         "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
         "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json"
+      ]
+    },
+    {
+      "name": "ascii",
+      "type": "registry:lib",
+      "title": "ASCII Field",
+      "description": "A deterministic ASCII pattern used as placeholder art in blocks.",
+      "files": [
+        {
+          "path": "registry/lib/ascii.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A 40px text input that matches the select trigger.",
+      "files": [
+        {
+          "path": "registry/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "Lightweight SVG area and bar charts drawn with the chart tokens.",
+      "files": [
+        {
+          "path": "registry/ui/chart.tsx",
+          "type": "registry:ui"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "hero-01",
+      "type": "registry:block",
+      "title": "Hero",
+      "description": "Landing navbar and hero with an ASCII preview window.",
+      "files": [
+        {
+          "path": "registry/blocks/hero-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/ascii.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/badge.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json"
+      ]
+    },
+    {
+      "name": "pricing-01",
+      "type": "registry:block",
+      "title": "Pricing",
+      "description": "Three plan cards with a monthly / yearly switch.",
+      "files": [
+        {
+          "path": "registry/blocks/pricing-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/badge.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/card.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/tabs.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "login-01",
+      "type": "registry:block",
+      "title": "Login",
+      "description": "Split sign-in screen with an ASCII art panel.",
+      "files": [
+        {
+          "path": "registry/blocks/login-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/ascii.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/field.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/switch.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json"
+      ]
+    },
+    {
+      "name": "dashboard-01",
+      "type": "registry:block",
+      "title": "Dashboard",
+      "description": "Sidebar, stat cards with sparklines, charts and an exports list.",
+      "files": [
+        {
+          "path": "registry/blocks/dashboard-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/badge.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/card.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/chart.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/progress.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/tabs.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "charts-01",
+      "type": "registry:block",
+      "title": "Charts",
+      "description": "Area, bar, ring and bar-list charts in a card grid.",
+      "files": [
+        {
+          "path": "registry/blocks/charts-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/card.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/chart.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/select.json"
+      ]
+    },
+    {
+      "name": "sidebar-01",
+      "type": "registry:block",
+      "title": "Icon rail sidebar",
+      "description": "A dark icon rail with tooltips plus a library panel.",
+      "files": [
+        {
+          "path": "registry/blocks/sidebar-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/ascii.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/tooltip.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "sidebar-02",
+      "type": "registry:block",
+      "title": "Floating sidebar",
+      "description": "An inset sidebar with a workspace switcher that collapses to icons.",
+      "files": [
+        {
+          "path": "registry/blocks/sidebar-02.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/badge.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/progress.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/select.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "navbar-01",
+      "type": "registry:block",
+      "title": "App navbar",
+      "description": "Breadcrumbs, search with a shortcut hint, underline tabs and a mobile drawer.",
+      "files": [
+        {
+          "path": "registry/blocks/navbar-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/drawer.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "settings-01",
+      "type": "registry:block",
+      "title": "Settings",
+      "description": "Settings page with section nav, form fields, switches and a danger zone.",
+      "files": [
+        {
+          "path": "registry/blocks/settings-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/card.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/field.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/input.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/select.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/slider.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/switch.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json"
+      ]
+    },
+    {
+      "name": "editor-01",
+      "type": "registry:block",
+      "title": "Editor",
+      "description": "The ASCII Studio editor: canvas, inspector sidebar and timeline.",
+      "files": [
+        {
+          "path": "registry/blocks/editor-01.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/utils.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/ascii.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/button-group.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/field.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/select.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/sidebar.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/slider.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/switch.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/timeline.json",
+        "https://pseudonym-dev.github.io/pseudonym-ui/r/top-bar.json"
       ]
     }
   ]
