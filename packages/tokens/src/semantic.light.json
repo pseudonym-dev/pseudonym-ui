@@ -34,9 +34,9 @@
       "overlay": { "$type": "color", "$value": "rgba(255, 255, 255, 0.9)" },
       "dots": { "$type": "color", "$value": "rgba(0, 0, 0, 0.07)" },
       "stripes": { "$type": "color", "$value": "rgba(0, 0, 0, 0.05)" },
-      "chart-1": { "$type": "color", "$value": "{color.brand.fill}" },
-      "chart-2": { "$type": "color", "$value": "{color.brand.ring}" },
-      "chart-3": { "$type": "color", "$value": "{color.brand.text}" },
+      "chart-1": { "$type": "color", "$value": "{color.brand.strong}" },
+      "chart-2": { "$type": "color", "$value": "{color.brand.text}" },
+      "chart-3": { "$type": "color", "$value": "{color.brand.fill}" },
       "chart-4": { "$type": "color", "$value": "{color.neutral.600}" },
       "chart-5": { "$type": "color", "$value": "{color.neutral.400}" },
       "canvas-shadow": {

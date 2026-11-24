@@ -15,7 +15,7 @@ function Progress({ className, value, ...props }: React.ComponentProps<typeof Pr
     >
       <ProgressPrimitive.Indicator
         data-slot="progress-indicator"
-        className="block h-full bg-primary transition-[width] duration-100"
+        className="block h-full bg-(--chart-1) transition-[width] duration-300 ease-(--ease) motion-reduce:transition-none"
       />
     </ProgressPrimitive.Root>
   );
