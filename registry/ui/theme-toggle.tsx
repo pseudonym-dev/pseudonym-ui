@@ -27,11 +27,6 @@ function applyTheme(theme: Theme) {
   const root = document.documentElement;
   root.classList.toggle("dark", theme === "dark");
   root.dataset.theme = theme;
-  try {
-    localStorage.setItem("theme", theme);
-  } catch {
-    /* private mode */
-  }
 }
 
 function getInitialTheme(defaultTheme?: Theme): Theme {
@@ -55,9 +50,15 @@ function ThemeProvider({
 }) {
   const [theme, setThemeState] = React.useState<Theme>(() => getInitialTheme(defaultTheme));
 
+  React.useEffect(() => applyTheme(theme), [theme]);
+
   const setTheme = React.useCallback((next: Theme) => {
     setThemeState(next);
-    applyTheme(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* private mode */
+    }
   }, []);
 
   const toggle = React.useCallback(() => {
