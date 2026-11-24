@@ -27,17 +27,14 @@ jobs:
         env:
           CI: true
 
-  pages:
+  # Build and upload must finish in their own job. deploy-pages in the same
+  # job as the upload often could not see the github-pages artifact yet.
+  pages-build:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: check
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -49,8 +46,23 @@ jobs:
       - run: pnpm build
         env:
           DOCS_BASE: /pseudonym-ui/
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: apps/docs/dist
-      - id: deploy
-        uses: actions/deploy-pages@v4
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: pages-build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
